@@ -1,0 +1,50 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug CLI (dev)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--"],
+      "skipFiles": ["<node_internals>/**"],
+      "console": "integratedTerminal"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Inject Command (dev)",
+      "runtimeExecutable": "/Users/cloudtogo/.nvm/versions/node/v20.0.0/bin/npm",
+      "runtimeArgs": ["run", "dev", "--", "inject", "--path", "./example/angular", "--framework", "angular"],
+      "skipFiles": ["<node_internals>/**"],
+      "console": "integratedTerminal"
+    }, 
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Command (test)",
+      "runtimeExecutable": "/Users/cloudtogo/.nvm/versions/node/v20.0.0/bin/npm",
+      "runtimeArgs": ["run", "test"],
+      "skipFiles": ["<node_internals>/**"],
+      "console": "integratedTerminal"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Extract Command (dev)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--", "extract", "--path", "./src", "--output", "./locales"],
+      "skipFiles": ["<node_internals>/**"],
+      "console": "integratedTerminal"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Translate Command (dev)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--", "translate", "--source", "zh", "--target", "en"],
+      "skipFiles": ["<node_internals>/**"],
+      "console": "integratedTerminal"
+    }
+  ]
+} 
