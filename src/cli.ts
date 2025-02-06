@@ -24,6 +24,7 @@ program
     'ng-i18n',
   )
   .option('-p, --prettier <boolean>', '是否使用prettier进行格式化', true)
+  .option('--prettier-config <path>', 'prettier配置文件路径')
   .action(async (options: InjectOptions) => {
     try {
       await inject(options);

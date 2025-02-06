@@ -4,6 +4,8 @@ import { parseAndTransform } from '../ast/parse';
 import type { InjectOptions } from '../types';
 import { getAllFiles } from '../utils';
 import { resolveConfig, format, resolveConfigFile } from 'prettier';
+import process from 'process';
+import path from 'path';
 
 const rules = [
   {
@@ -11,12 +13,14 @@ const rules = [
     framework: 'angular',
     library: 'ng-i18n',
     transformer: injectNgI18nKeyInTemplate,
+    prettierParser: 'angular',
   },
   {
     extention: '.component.ts',
     framework: 'angular',
     library: 'ng-i18n',
     transformer: injectNgI18nKeyInTS,
+    prettierParser: 'typescript',
   },
 ];
 
@@ -31,6 +35,7 @@ export async function injectCode(
     framework,
     library,
     prettier: prettierEnabled,
+    prettierConfig: prettierConfigPath,
   }: { code: string; fileName: string } & Omit<InjectOptions, 'path'>,
   currentRules?: typeof rules,
 ) {
@@ -44,9 +49,21 @@ export async function injectCode(
 
     if (newContent) {
       if (prettierEnabled) {
-        const configPath = await resolveConfigFile();
-        const prettierConfig = await resolveConfig(configPath);
-        newContent = await format(newContent, { ...prettierConfig, filepath: fileName });
+        const configPath = await resolveConfigFile(prettierConfigPath);
+        const prettierConfig = await resolveConfig(configPath, {
+          useCache: false,
+          editorconfig: false,
+        });
+        try {
+          newContent = await format(newContent, {
+            ...prettierConfig,
+            filepath: fileName,
+            parser: rule.prettierParser,
+          });
+        } catch(e) {
+          console.warn(`${fileName} was formateted failed`, e)
+        }
+       
       }
       break;
     }
@@ -54,12 +71,7 @@ export async function injectCode(
   return newContent;
 }
 
-export async function inject({
-  path,
-  framework,
-  library,
-  prettier: prettierEnabled,
-}: InjectOptions) {
+export async function inject({ path, framework, library, ...options }: InjectOptions) {
   const currentRules = getMatchingRules({ framework, library });
 
   for (const rule of currentRules) {
@@ -70,7 +82,7 @@ export async function inject({
       const code = readFileSync(file, 'utf-8');
 
       const newContent = await injectCode(
-        { code, fileName: file, framework, library, prettier: prettierEnabled },
+        { code, fileName: file, framework, library, ...options },
         currentRules,
       );
 

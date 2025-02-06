@@ -33,8 +33,9 @@ export function parseAndTransform(filename: string, content: string, visitor: an
       sourceType: 'module',
       plugins: [
         'typescript',
-        'decorators',
+        // 'decorators',
         'decoratorAutoAccessors',
+        'decorators-legacy',
         'doExpressions',
         'exportDefaultFrom',
         'functionBind',
@@ -45,6 +46,7 @@ export function parseAndTransform(filename: string, content: string, visitor: an
 
     traverseNgTS(ast, visitor);
     return generate(ast, {
+      retainLines: true,
       jsescOption: {
         // 避免中文字符被转为unicode
         minimal: true,

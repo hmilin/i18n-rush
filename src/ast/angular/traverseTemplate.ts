@@ -4,13 +4,14 @@ export default function traverseTemplate(ast: ParseTreeResult, vistor: (n: any) 
   const templateNodes = ast.rootNodes;
 
   const traverse = (node: any, vistor: (n: any) => void) => {
+    // 使用先序遍历
+    vistor(node);
     if (node.children) {
       node.children.forEach(child => {
         child.parent = node
         traverse(child, vistor);
       });
     }
-    vistor(node);
   };
 
   templateNodes?.forEach(node => {

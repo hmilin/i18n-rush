@@ -48,6 +48,16 @@ export const injectNgI18nKeyInTemplate = (node: Node) => {
         }
       }
     }
+
+    if (node.children.length > 1) {
+      // 给孤立的Text节点加ng-container，防止出现嵌套的i18n关键字
+      node.children = node.children.map(child => {
+        if (child instanceof Text && isContainChinese(child.value)) {
+          return new Element('ng-container', [], [child], undefined, undefined);
+        }
+        return child;
+      });
+    }
   }
 };
 
