@@ -1,26 +1,41 @@
-import { readFileSync, writeFileSync } from 'fs';
-import { injectNgI18nKeyInTemplate, injectNgI18nKeyInTS } from '../ast/ng-i18n';
+import { readFileSync, writeFileSync } from 'node:fs';
+import {
+  injectNgI18nKeyInTemplate,
+  injectNgI18nKeyInTS,
+  NgI18nTemplateTransformer,
+  NgI18nTSTransformer,
+} from '../ast/ng-i18n';
 import { parseAndTransform } from '../ast/parse';
 import type { InjectOptions } from '../types';
 import { getAllFiles } from '../utils';
 import { resolveConfig, format, resolveConfigFile } from 'prettier';
-import process from 'process';
-import path from 'path';
+import { I18nextTransformer } from 'src/ast/i18next';
 
 const rules = [
   {
-    extention: '.component.html',
+    extentions: ['.component.html'],
     framework: 'angular',
     library: 'ng-i18n',
-    transformer: injectNgI18nKeyInTemplate,
+    transformer: NgI18nTemplateTransformer,
     prettierParser: 'angular',
   },
   {
-    extention: '.component.ts',
+    extentions: ['.component.ts'],
     framework: 'angular',
     library: 'ng-i18n',
-    transformer: injectNgI18nKeyInTS,
+    transformer: NgI18nTSTransformer,
     prettierParser: 'typescript',
+  },
+  {
+    extentions: ['.tsx', '.jsx', '.ts', '.js'],
+    framework: 'react',
+    library: 'i18next',
+    transformer: I18nextTransformer,
+  },
+  {
+    extentions: ['.tsx', '.jsx', '.ts', '.js'],
+    framework: 'react',
+    library: 'react-i18next',
   },
 ];
 
@@ -44,7 +59,7 @@ export async function injectCode(
   let newContent: string;
 
   for (const rule of currentRules) {
-    if (!fileName.endsWith(rule.extention)) continue;
+    if (!rule.extentions.some(extention => fileName.endsWith(extention))) continue;
     newContent = parseAndTransform(fileName, code, rule.transformer);
 
     if (newContent) {
@@ -60,10 +75,9 @@ export async function injectCode(
             filepath: fileName,
             parser: rule.prettierParser,
           });
-        } catch(e) {
-          console.warn(`${fileName} was formateted failed`, e)
+        } catch (e) {
+          console.warn(`${fileName} was formateted failed`, e);
         }
-       
       }
       break;
     }
@@ -76,7 +90,7 @@ export async function inject({ path, framework, library, ...options }: InjectOpt
 
   for (const rule of currentRules) {
     // 遍历所有文件
-    const files = await getAllFiles(path, [rule.extention]);
+    const files = await getAllFiles(path, rule.extentions);
     // 转为ast树
     for (const file of files) {
       const code = readFileSync(file, 'utf-8');

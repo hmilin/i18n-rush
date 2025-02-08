@@ -1,4 +1,4 @@
-import { Visitor } from '@babel/traverse';
+import { Node, VisitNodeFunction } from '@babel/traverse';
 
 export type InjectOptions = {
   path: string;
@@ -9,4 +9,15 @@ export type InjectOptions = {
   prettierConfig?: string;
 };
 
-export type VisitorFunction = Visitor;
+export type ExtractOptions = {
+  path: string;
+  /** 输出目录 */
+  output: string;
+  framework: 'angular' | 'react';
+  library: 'ng-i18n' | 'ngx-translate' | 'i18next' | 'react-i18n';
+};
+
+export type VisitorObject = {
+  enter: VisitNodeFunction<Node, Node>;
+  exit: VisitNodeFunction<Node, Node>;
+};

@@ -6,11 +6,12 @@ import parseAngularTemplate from './parseNgTemplate';
 import traverseTemplate from './traverseTemplate';
 import { injectNgI18nKeyInTemplate } from '../ng-i18n';
 import { revertNgTemplate } from './revertNgTemplate';
+import { VisitorObject } from '../../types';
 
 type AST = ReturnType<typeof parse>;
-export default function traverseNgTS(ast: AST, visitor: (n: any) => void) {
+export default function traverseNgTS(ast: AST, visitorObj: VisitorObject) {
   traverse(ast, {
-    enter: visitor,
+    ...visitorObj,
     Decorator: path => {
       // 处理@Component装饰器中的template
       if (path.node.expression.callee.name === 'Component') {
@@ -35,7 +36,7 @@ export default function traverseNgTS(ast: AST, visitor: (n: any) => void) {
                   subPath.node.value.value = newTemplate;
                   subPath.node.value.extra = {
                     raw: newTemplate,
-                  }
+                  };
                 }
               }
             }

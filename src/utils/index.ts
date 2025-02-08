@@ -31,3 +31,5 @@ export async function getAllFiles(dir: string, extensions: string[]): Promise<st
   await traverse(dir);
   return files;
 }
+
+export const isContainChinese = (text = '') => /[\u4e00-\u9fa5]/.test(text);

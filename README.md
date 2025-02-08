@@ -4,10 +4,10 @@
 
 支持的国际化库：
 
-- @angular/localize
-- ngx-translate
-- i18next
-- react-i18next
+- [x] @angular/localize
+- [ ] ngx-translate
+- [ ] i18next
+- [ ] react-i18next
 
 功能点：
 

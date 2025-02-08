@@ -15,7 +15,7 @@
       "request": "launch",
       "name": "Debug Inject Command (dev)",
       "runtimeExecutable": "/Users/cloudtogo/.nvm/versions/node/v20.0.0/bin/npm",
-      "runtimeArgs": ["run", "dev", "--", "inject", "--path", "./example/angular", "--framework", "angular"],
+      "runtimeArgs": ["run", "dev", "--", "inject", "--path", "./example/react", "--framework", "react", "--library", "i18next"],
       "skipFiles": ["<node_internals>/**"],
       "console": "integratedTerminal"
     }, 
@@ -32,8 +32,8 @@
       "type": "node",
       "request": "launch",
       "name": "Debug Extract Command (dev)",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--", "extract", "--path", "./src", "--output", "./locales"],
+      "runtimeExecutable": "/Users/cloudtogo/.nvm/versions/node/v20.0.0/bin/npm",
+      "runtimeArgs": ["run", "dev", "--", "extract", "--path", "../factory/src", "--output", "../factory/src/locales", "--framework", "angular", "factory"],
       "skipFiles": ["<node_internals>/**"],
       "console": "integratedTerminal"
     },

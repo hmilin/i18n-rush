@@ -1,12 +1,10 @@
-import ts from 'typescript';
 import * as t from '@babel/types';
 
 import { NodePath } from '@babel/traverse';
 import { isTaggedTemplateExpression } from '@babel/types';
 import { isTSLiteralType } from '@babel/types';
 import { Text, Element, Attribute, Node } from '@angular/compiler';
-
-const isContainChinese = (text = '') => /[\u4e00-\u9fa5]/.test(text);
+import { isContainChinese } from '../utils';
 
 const extractAttrKey = (text = '') => /[\w-_]+/.exec(text)?.[0];
 
@@ -61,6 +59,10 @@ export const injectNgI18nKeyInTemplate = (node: Node) => {
   }
 };
 
+export const NgI18nTemplateTransformer = {
+  enter: injectNgI18nKeyInTemplate,
+};
+
 export const injectNgI18nKeyInTS = (path: NodePath) => {
   if (isTSLiteralType(path.parent)) {
     return;
@@ -70,10 +72,12 @@ export const injectNgI18nKeyInTS = (path: NodePath) => {
       if (isContainChinese(path.node.value!)) {
         path.replaceWith(createTaggedTemplateExpression('$localize', path.node.value));
       }
+      path.skip();
     } else if (t.isTemplateLiteral(path.node) && !isTaggedTemplateExpression(path.parent)) {
       if (path.node.quasis.some(quasi => isContainChinese(quasi.value.raw))) {
         path.replaceWith(createTaggedTemplateExpression('$localize', path.node));
       }
+      path.skip();
     }
   } catch (e) {
     console.log('replace failed: ', path.node);
@@ -89,3 +93,7 @@ function createTaggedTemplateExpression(tag: string, template: string | t.Templa
       : template,
   );
 }
+
+export const NgI18nTSTransformer = {
+  enter: injectNgI18nKeyInTS,
+};

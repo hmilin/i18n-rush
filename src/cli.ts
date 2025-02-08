@@ -4,7 +4,7 @@ import { Command } from 'commander';
 import { inject } from './commands/inject';
 import { extract } from './commands/extract';
 import { translate } from './commands/translate';
-import { InjectOptions } from './types';
+import { ExtractOptions, InjectOptions } from './types';
 
 const program = new Command();
 
@@ -40,7 +40,12 @@ program
   .option('-p, --path <path>', '指定源代码路径', './src')
   .option('-o, --output <output>', '指定输出路径', './src/locales')
   .option('-f, --framework <framework>', '指定项目类型 (angular|react)', 'react')
-  .action(async (options: { path: string; output: string; framework: 'angular' | 'react' }) => {
+  .option(
+    '-l, --library <library>',
+    '指定使用的国际化库(ng-i18n|ngx-translate|i18next|react-i18n)',
+    'ng-i18n',
+  )
+  .action(async (options: ExtractOptions) => {
     try {
       await extract(options);
     } catch (error) {
