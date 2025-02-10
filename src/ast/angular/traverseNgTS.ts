@@ -4,7 +4,7 @@ import { isClassDeclaration } from '@babel/types';
 import { isExportNamedDeclaration } from '@babel/types';
 import parseAngularTemplate from './parseNgTemplate';
 import traverseTemplate from './traverseTemplate';
-import { injectNgI18nKeyInTemplate } from '../ng-i18n';
+import { injectNgI18nKeyInTemplate } from '../parser/ng-i18n';
 import { revertNgTemplate } from './revertNgTemplate';
 import { VisitorObject } from '../../types';
 

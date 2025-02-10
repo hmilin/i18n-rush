@@ -1,6 +1,6 @@
 import { NodePath } from '@babel/traverse';
 import * as t from '@babel/types';
-import { isContainChinese } from '../utils';
+import { isContainChinese } from '@/utils';
 
 let injected = false;
 

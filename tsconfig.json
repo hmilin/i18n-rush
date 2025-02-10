@@ -14,7 +14,10 @@
     "noEmit": true,
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals"],
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
   "include": ["src/**/*", "node_modules/**/*"],
   "exclude": ["dist"]

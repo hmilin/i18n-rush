@@ -1,7 +1,7 @@
 import { exec, spawn } from 'node:child_process';
 import { ExtractOptions } from 'src/types';
 import path from 'node:path';
-import { getAllFiles } from 'src/utils';
+import { getAllFiles } from '@/utils';
 import * as i18nextScanner from 'i18next-scanner';
 import { readFileSync, writeFileSync } from 'node:fs';
 

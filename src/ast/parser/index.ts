@@ -1,14 +1,14 @@
 import traverse from '@babel/traverse';
 import { parse } from '@babel/parser';
-import traverseTemplate from './angular/traverseTemplate';
+import traverseTemplate from '../angular/traverseTemplate';
 import { injectNgI18nKeyInTemplate } from './ng-i18n';
 import generate from '@babel/generator';
-import { revertNgTemplate } from './angular/revertNgTemplate';
-import parseAngularTemplate from './angular/parseNgTemplate';
+import { revertNgTemplate } from '../angular/revertNgTemplate';
+import parseAngularTemplate from '../angular/parseNgTemplate';
 import { isExportDeclaration } from '@babel/types';
 import { isExportNamedDeclaration } from '@babel/types';
 import { isClassDeclaration } from '@babel/types';
-import traverseNgTS from './angular/traverseNgTS';
+import traverseNgTS from '../angular/traverseNgTS';
 
 /**
  * 解析代码为 AST，遍历处理后重新生成代码

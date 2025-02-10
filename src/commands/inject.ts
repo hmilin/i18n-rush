@@ -1,10 +1,10 @@
 import { readFileSync, writeFileSync } from 'node:fs';
-import { NgI18nTemplateTransformer, NgI18nTSTransformer } from '../ast/ng-i18n';
-import { parseAndTransform } from '../ast/parse';
+import { NgI18nTemplateTransformer, NgI18nTSTransformer } from '@/ast/parser/ng-i18n';
+import { parseAndTransform } from '@/ast/parser';
 import type { InjectOptions } from '../types';
 import { getAllFiles } from '../utils';
 import { resolveConfig, format, resolveConfigFile } from 'prettier';
-import { I18nextTransformer } from 'src/ast/i18next';
+import { I18nextTransformer } from '@/ast/parser/i18next';
 
 const rules = [
   {

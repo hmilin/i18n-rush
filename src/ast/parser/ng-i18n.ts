@@ -4,7 +4,7 @@ import { NodePath } from '@babel/traverse';
 import { isTaggedTemplateExpression } from '@babel/types';
 import { isTSLiteralType } from '@babel/types';
 import { Text, Element, Attribute, Node } from '@angular/compiler';
-import { isContainChinese } from '../utils';
+import { isContainChinese } from '@/utils';
 
 const extractAttrKey = (text = '') => /[\w-_]+/.exec(text)?.[0];
 
