@@ -15,6 +15,8 @@ export type ExtractOptions = {
   output: string;
   framework: 'angular' | 'react';
   library: 'ng-i18n' | 'ngx-translate' | 'i18next' | 'react-i18n';
+  /** @default zh */
+  language?: string;
 };
 
 export type VisitorObject = {

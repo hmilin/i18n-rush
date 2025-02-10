@@ -26,6 +26,7 @@
     "@types/node": "^20.0.0",
     "child_process": "^1.0.2",
     "estraverse": "^5.3.0",
+    "i18next-scanner": "^4.6.0",
     "prettier": "^3.4.2",
     "ts-node": "^10.9.1",
     "typescript": "^5.7.3",

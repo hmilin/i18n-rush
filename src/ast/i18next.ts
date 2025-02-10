@@ -12,7 +12,10 @@ export const I18nextTransformer = {
 
     if (t.isJSXText(path.node) && isContainChinese(path.node.value)) {
       const i18nCallExpression = t.callExpression(t.identifier('t'), [
-        t.stringLiteral(path.node.value),
+        t.stringLiteral(
+          // 替换掉前后换行符
+          path.node.value.replace(/(^[\s]*)|([\s]*$)/g, ''),
+        ),
       ]);
       path.replaceWith(t.jsxExpressionContainer(i18nCallExpression));
       path.skip();

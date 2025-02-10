@@ -15,7 +15,7 @@
       "request": "launch",
       "name": "Debug Inject Command (dev)",
       "runtimeExecutable": "/Users/cloudtogo/.nvm/versions/node/v20.0.0/bin/npm",
-      "runtimeArgs": ["run", "dev", "--", "inject", "--path", "./example/react", "--framework", "react", "--library", "i18next"],
+      "runtimeArgs": ["run", "dev", "--", "inject", "--path", "../anbp/packages/portal/src", "--framework", "react", "--library", "i18next", "--prettier-config", "../anbp/packages/portal/.prettierrc.cjs"],
       "skipFiles": ["<node_internals>/**"],
       "console": "integratedTerminal"
     }, 
@@ -33,7 +33,7 @@
       "request": "launch",
       "name": "Debug Extract Command (dev)",
       "runtimeExecutable": "/Users/cloudtogo/.nvm/versions/node/v20.0.0/bin/npm",
-      "runtimeArgs": ["run", "dev", "--", "extract", "--path", "../factory/src", "--output", "../factory/src/locales", "--framework", "angular", "factory"],
+      "runtimeArgs": ["run", "dev", "--", "extract", "--path", "./example/react", "--output", "./example/react/locales", "--framework", "react", "--library", "i18next"],
       "skipFiles": ["<node_internals>/**"],
       "console": "integratedTerminal"
     },

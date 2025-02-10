@@ -1,10 +1,5 @@
 import { readFileSync, writeFileSync } from 'node:fs';
-import {
-  injectNgI18nKeyInTemplate,
-  injectNgI18nKeyInTS,
-  NgI18nTemplateTransformer,
-  NgI18nTSTransformer,
-} from '../ast/ng-i18n';
+import { NgI18nTemplateTransformer, NgI18nTSTransformer } from '../ast/ng-i18n';
 import { parseAndTransform } from '../ast/parse';
 import type { InjectOptions } from '../types';
 import { getAllFiles } from '../utils';
