@@ -5,6 +5,7 @@ import type { InjectOptions } from '../types';
 import { getAllFiles } from '../utils';
 import { resolveConfig, format, resolveConfigFile } from 'prettier';
 import { I18nextTransformer } from '@/ast/parser/i18next';
+import { ReactI18nextTransformer } from 'src/ast/parser/react-i18next';
 
 const rules = [
   {
@@ -31,6 +32,7 @@ const rules = [
     extentions: ['.tsx', '.jsx', '.ts', '.js'],
     framework: 'react',
     library: 'react-i18next',
+    transformer: ReactI18nextTransformer,
   },
 ];
 

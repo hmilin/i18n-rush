@@ -10,6 +10,7 @@ export const I18nextTransformer = {
     // t('xxx')
     if (!path.parent) injected = false;
 
+    // <Com>xxx</Com>
     if (t.isJSXText(path.node) && isContainChinese(path.node.value)) {
       const i18nCallExpression = t.callExpression(t.identifier('t'), [
         t.stringLiteral(
@@ -35,6 +36,7 @@ export const I18nextTransformer = {
           t.stringLiteral(path.node.value),
         ]);
 
+        // <Com attr="xxx" />
         if (t.isJSXAttribute(path.parent)) {
           path.replaceWith(t.jsxExpressionContainer(i18nCallExpression));
         } else {

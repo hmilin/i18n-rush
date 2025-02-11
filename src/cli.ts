@@ -20,7 +20,7 @@ program
   .option('-f, --framework <framework>', '指定项目类型 (angular|react)', 'angular')
   .option(
     '-l, --library <library>',
-    '指定使用的国际化库(ng-i18n|ngx-translate|i18next|react-i18n)',
+    '指定使用的国际化库(ng-i18n|ngx-translate|i18next|react-i18next)',
     'ng-i18n',
   )
   .option('-p, --prettier <boolean>', '是否使用prettier进行格式化', true)
