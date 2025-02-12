@@ -18,65 +18,69 @@ import traverseNgTS from '../angular/traverseNgTS';
  * @returns 处理后的代码
  */
 export function parseAndTransform(filename: string, content: string, visitorObj: any): string {
-  if (filename.endsWith('.component.html')) {
-    const ast = parseAngularTemplate(content, filename);
+  try {
+    if (filename.endsWith('.component.html')) {
+      const ast = parseAngularTemplate(content, filename);
 
-    traverseTemplate(ast, visitorObj.enter);
+      traverseTemplate(ast, visitorObj.enter);
 
-    // 将 AST 转回代码
-    return revertNgTemplate(ast.rootNodes);
-  }
+      // 将 AST 转回代码
+      return revertNgTemplate(ast.rootNodes);
+    }
 
-  if (filename.endsWith('.component.ts')) {
-    const ast = parse(content, {
-      sourceType: 'module',
-      plugins: [
-        'typescript',
-        // 'decorators',
-        'decoratorAutoAccessors',
-        'decorators-legacy',
-        'doExpressions',
-        'exportDefaultFrom',
-        'functionBind',
-        'importAssertions',
-        'regexpUnicodeSets',
-      ],
-    });
+    if (filename.endsWith('.component.ts')) {
+      const ast = parse(content, {
+        sourceType: 'module',
+        plugins: [
+          'typescript',
+          // 'decorators',
+          'decoratorAutoAccessors',
+          'decorators-legacy',
+          'doExpressions',
+          'exportDefaultFrom',
+          'functionBind',
+          'importAssertions',
+          'regexpUnicodeSets',
+        ],
+      });
 
-    traverseNgTS(ast, visitorObj);
-    return generate(ast, {
-      retainLines: true,
-      jsescOption: {
-        // 避免中文字符被转为unicode
-        minimal: true,
-      },
-    }).code;
-  }
+      traverseNgTS(ast, visitorObj);
+      return generate(ast, {
+        retainLines: true,
+        jsescOption: {
+          // 避免中文字符被转为unicode
+          minimal: true,
+        },
+      }).code;
+    }
 
-  // 其他ts或js文件
-  if (/[jt]sx?$/.test(filename)) {
-    const ast = parse(content, {
-      sourceType: 'module',
-      plugins: [
-        'typescript',
-        'jsx',
-        'decorators',
-        'decoratorAutoAccessors',
-        'doExpressions',
-        'exportDefaultFrom',
-        'functionBind',
-        'importAssertions',
-        'regexpUnicodeSets',
-      ],
-    });
-    traverse(ast, visitorObj);
-    return generate(ast, {
-      retainLines: true,
-      jsescOption: {
-        // 避免中文字符被转为unicode
-        minimal: true,
-      },
-    }).code;
+    // 其他ts或js文件
+    if (/[jt]sx?$/.test(filename)) {
+      const ast = parse(content, {
+        sourceType: 'module',
+        plugins: [
+          'typescript',
+          'jsx',
+          'decorators',
+          'decoratorAutoAccessors',
+          'doExpressions',
+          'exportDefaultFrom',
+          'functionBind',
+          'importAssertions',
+          'regexpUnicodeSets',
+        ],
+      });
+      traverse(ast, visitorObj);
+      return generate(ast, {
+        retainLines: true,
+        jsescOption: {
+          // 避免中文字符被转为unicode
+          minimal: true,
+        },
+      }).code;
+    }
+  } catch (e) {
+    console.error(`transform file:${filename}  failed ===> error:`, e);
   }
 
   return content;

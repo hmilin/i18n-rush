@@ -29,10 +29,17 @@ const rules = [
     transformer: I18nextTransformer,
   },
   {
-    extentions: ['.tsx', '.jsx', '.ts', '.js'],
+    extentions: ['.tsx', '.jsx'],
     framework: 'react',
     library: 'react-i18next',
     transformer: ReactI18nextTransformer,
+  },
+  // js ts文件使用i18next
+  {
+    extentions: ['.ts', '.js'],
+    framework: 'react',
+    library: 'react-i18next',
+    transformer: I18nextTransformer,
   },
 ];
 

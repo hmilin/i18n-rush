@@ -3,7 +3,7 @@ import { Node, VisitNodeFunction } from '@babel/traverse';
 export type InjectOptions = {
   path: string;
   framework: 'angular' | 'react';
-  library: 'ng-i18n' | 'ngx-translate' | 'i18next' | 'react-i18n';
+  library: 'ng-i18n' | 'i18next' | 'react-i18n';
   /** @default true */
   prettier?: boolean;
   prettierConfig?: string;
@@ -14,7 +14,7 @@ export type ExtractOptions = {
   /** 输出目录 */
   output: string;
   framework: 'angular' | 'react';
-  library: 'ng-i18n' | 'ngx-translate' | 'i18next' | 'react-i18n';
+  library: 'ng-i18n' | 'i18next' | 'react-i18n';
   /** @default zh */
   language?: string;
 };

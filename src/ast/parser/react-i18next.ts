@@ -132,7 +132,7 @@ export const ReactI18nextTransformer = {
     }
 
     if (isReactComponent(path) && hookWillBeCalled) {
-      let node = path.node
+      let node = path.node;
       if (t.isExportNamedDeclaration(node) || t.isExportDefaultDeclaration(node)) {
         node = node.declaration;
       }
@@ -142,7 +142,7 @@ export const ReactI18nextTransformer = {
       ) => {
         const hookCallExpression = t.variableDeclaration('const', [
           t.variableDeclarator(
-            t.identifier('t'),
+            t.objectPattern([t.objectProperty(t.identifier('t'), t.identifier('t'), false, true)]),
             t.callExpression(t.identifier('useTranslation'), []),
           ),
         ]);

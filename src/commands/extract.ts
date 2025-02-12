@@ -1,4 +1,3 @@
-import { exec, spawn } from 'node:child_process';
 import { ExtractOptions } from 'src/types';
 import path from 'node:path';
 import { getAllFiles } from '@/utils';
@@ -16,7 +15,7 @@ export async function extract({
   if (framework === 'angular') {
     console.log('please use ng extract-i18n');
   }
-  if (framework === 'react' && library === 'i18next') {
+  if (library?.includes('i18next')) {
     const outputFile = path.resolve(output);
     extractI18next(sourcePath, `${outputFile}/${language}.json`);
   }

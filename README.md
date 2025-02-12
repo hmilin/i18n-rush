@@ -5,7 +5,6 @@
 支持的国际化库：
 
 - [x] @angular/localize
-- [ ] ngx-translate
 - [ ] i18next
 - [ ] react-i18next
 
