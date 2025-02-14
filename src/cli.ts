@@ -18,11 +18,7 @@ program
   .description('给使用中文文本的地方插入 i18n key')
   .option('-p, --path <path>', '指定源代码路径', './src')
   .option('-f, --framework <framework>', '指定项目类型 (angular|react)', 'angular')
-  .option(
-    '-l, --library <library>',
-    '指定使用的国际化库(ng-i18n|i18next|react-i18next)',
-    'ng-i18n',
-  )
+  .option('-l, --library <library>', '指定使用的国际化库(ng-i18n|i18next|react-i18next)', 'ng-i18n')
   .option('-p, --prettier <boolean>', '是否使用prettier进行格式化', true)
   .option('--prettier-config <path>', 'prettier配置文件路径')
   .action(async (options: InjectOptions) => {
@@ -40,11 +36,7 @@ program
   .option('-p, --path <path>', '指定源代码路径', './src')
   .option('-o, --output <output>', '指定输出路径', './src/locales')
   .option('-f, --framework <framework>', '指定项目类型 (angular|react)', 'react')
-  .option(
-    '-l, --library <library>',
-    '指定使用的国际化库(ng-i18n|i18next|react-i18n)',
-    'ng-i18n',
-  )
+  .option('-l, --library <library>', '指定使用的国际化库(ng-i18n|i18next|react-i18n)', 'ng-i18n')
   .action(async (options: ExtractOptions) => {
     try {
       await extract(options);
@@ -57,10 +49,14 @@ program
 program
   .command('translate')
   .description('调用翻译服务或模型自动翻译')
-  .option('-s, --source <source>', '源语言', 'zh')
-  .option('-t, --target <target>', '目标语言', 'en')
+  .requiredOption('-s, --source <source>', '源文件')
+  .requiredOption('-t, --target <target>', '输出文件')
+  .option('--sourceLanguage <source>', '源语言', 'zh')
+  .option('--targetLanguage <target>', '目标语言', 'en')
   .option('-p, --path <path>', '指定翻译文件路径', './src/locales')
   .option('-e, --engine <engine>', '指定翻译引擎 (google|openai)', 'google')
+  .option('--proxy <proxyUrl>', '调用fetch接口时使用代理')
+  .option('-f, --format <format>', '格式 支持xlf、xlf2、json', 'json')
   .action(
     async (options: {
       source: string;

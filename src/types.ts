@@ -15,8 +15,21 @@ export type ExtractOptions = {
   output: string;
   framework: 'angular' | 'react';
   library: 'ng-i18n' | 'i18next' | 'react-i18n';
-  /** @default zh */
+  /** @default 'zh' */
   language?: string;
+};
+
+export type TranslateOptions = {
+  source: string;
+  target: string;
+  /** @default 'zh-CN' */
+  sourceLanguage?: string;
+  /** @default 'en'  */
+  targetLanguage?: string;
+  /** @default 'json' */
+  format?: 'xlf' | 'xlf2' | 'json';
+  model?: string;
+  proxy?: string;
 };
 
 export type VisitorObject = {

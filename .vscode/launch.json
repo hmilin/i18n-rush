@@ -15,10 +15,21 @@
       "request": "launch",
       "name": "Debug Inject Command (dev)",
       "runtimeExecutable": "/Users/cloudtogo/.nvm/versions/node/v20.0.0/bin/npm",
-      "runtimeArgs": ["run", "dev", "--", "inject", "--path", "./example/react", "--framework", "react", "--library", "react-i18next"],
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--",
+        "inject",
+        "--path",
+        "./example/react",
+        "--framework",
+        "react",
+        "--library",
+        "react-i18next"
+      ],
       "skipFiles": ["<node_internals>/**"],
       "console": "integratedTerminal"
-    }, 
+    },
     {
       "type": "node",
       "request": "launch",
@@ -33,7 +44,20 @@
       "request": "launch",
       "name": "Debug Extract Command (dev)",
       "runtimeExecutable": "/Users/cloudtogo/.nvm/versions/node/v20.0.0/bin/npm",
-      "runtimeArgs": ["run", "dev", "--", "extract", "--path", "../anbp/packages/portal/src", "--output", "../anbp/packages/portal/src/locales", "--framework", "react", "--library", "i18next"],
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--",
+        "extract",
+        "--path",
+        "../anbp/packages/portal/src",
+        "--output",
+        "../anbp/packages/portal/src/locales",
+        "--framework",
+        "react",
+        "--library",
+        "i18next"
+      ],
       "skipFiles": ["<node_internals>/**"],
       "console": "integratedTerminal"
     },
@@ -41,10 +65,27 @@
       "type": "node",
       "request": "launch",
       "name": "Debug Translate Command (dev)",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--", "translate", "--source", "zh", "--target", "en"],
+      "runtimeExecutable": "/Users/cloudtogo/.nvm/versions/node/v20.0.0/bin/npm",
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--",
+        "translate",
+        "--source",
+        "../anbp/packages/portal/src/locales/zh.json",
+        "--target",
+        "../anbp/packages/portal/src/locales/en.json",
+        "--sourceLanguage",
+        "zh",
+        "--targetLanguage",
+        "en",
+        "--format",
+        "json",
+        "--proxy",
+        "http://127.0.0.1:7897"
+      ],
       "skipFiles": ["<node_internals>/**"],
       "console": "integratedTerminal"
     }
   ]
-} 
+}
