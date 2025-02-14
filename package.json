@@ -1,11 +1,11 @@
 {
-  "name": "i18n-shin",
+  "name": "i18n-rush",
   "version": "1.0.0",
   "description": "国际化升级工具 - 帮助 Angular、React 项目快速实现国际化",
   "main": "src/cli.js",
   "type": "module",
   "bin": {
-    "i18n-shin": "./src/cli.js"
+    "i18n-rush": "./src/cli.js"
   },
   "scripts": {
     "build": "tsc",

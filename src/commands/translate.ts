@@ -107,10 +107,10 @@ async function translateSingleText(text: string, model: string) {
   try {
     const res = await translate(text);
     const translationText = res[0].translation_text as string;
-    console.log(`,translate successful, word: ${text}, result ===> `, translationText);
+    console.log(`translate successful, word: ${text}, result ===> `, translationText);
     return translationText;
   } catch (e) {
-    console.error(`translate failed, word: ${text}, error===>`, e);
+    console.error(`translate failed, word: ${text}, error ===> `, e);
   }
   return text;
 }

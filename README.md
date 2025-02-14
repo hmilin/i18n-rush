@@ -5,14 +5,14 @@
 支持的国际化库：
 
 - [x] @angular/localize
-- [ ] i18next
-- [ ] react-i18next
+- [x] i18next
+- [x] react-i18next
 
 功能点：
 
 - 给使用中文文本的地方插入i18n key
 - 提取出国际化文件
-- 调用翻译服务或模型自动翻译
+- 调用翻译模型自动翻译
 - 复杂场景比如复数之类的 能识别出来吗？
 
 ## CLI
@@ -21,7 +21,7 @@
 ### inject i18n key
 
 ```
-i18n-shin inject
+i18n-rush inject
 ```
 
 ### extract i18n
@@ -29,8 +29,11 @@ i18n-shin inject
 根据i18n key提取翻译文件，根据对应的国际化库使用现成工具即可
 
 ```
-i18n-shin extract
+i18n-rush extract
 ```
 
 ### translate
 
+```
+i18n-rush translate
+```

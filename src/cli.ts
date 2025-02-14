@@ -9,7 +9,7 @@ import { ExtractOptions, InjectOptions } from './types';
 const program = new Command();
 
 program
-  .name('i18n-shin')
+  .name('i18n-rush')
   .description('国际化升级工具 - 帮助 Angular、React 项目快速实现国际化')
   .version('1.0.0');
 
