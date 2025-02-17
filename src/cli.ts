@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
-import { Command } from 'commander';
 import { inject } from './commands/inject';
 import { extract } from './commands/extract';
 import { translate } from './commands/translate';
 import { ExtractOptions, InjectOptions } from './types';
 
+const { Command } = require('commander');
 const program = new Command();
 
 program
@@ -16,7 +16,7 @@ program
 program
   .command('inject')
   .description('给使用中文文本的地方插入 i18n key')
-  .option('-p, --path <path>', '指定源代码路径', './src')
+  .requiredOption('-p, --path <path>', '指定源代码路径', './src')
   .option('-f, --framework <framework>', '指定项目类型 (angular|react)', 'angular')
   .option('-l, --library <library>', '指定使用的国际化库(ng-i18n|i18next|react-i18next)', 'ng-i18n')
   .option('-p, --prettier <boolean>', '是否使用prettier进行格式化', true)
@@ -24,6 +24,7 @@ program
   .action(async (options: InjectOptions) => {
     try {
       await inject(options);
+      console.log('执行成功');
     } catch (error) {
       console.error('注入失败:', error);
       process.exit(1);
@@ -33,13 +34,14 @@ program
 program
   .command('extract')
   .description('根据 i18n key 提取翻译文件')
-  .option('-p, --path <path>', '指定源代码路径', './src')
-  .option('-o, --output <output>', '指定输出路径', './src/locales')
-  .option('-f, --framework <framework>', '指定项目类型 (angular|react)', 'react')
+  .requiredOption('-p, --path <path>', '指定源代码路径', './src')
+  .requiredOption('-o, --output <output>', '指定输出路径', './src/locales')
+  .option('-f, --framework <framework>', '指定项目类型 (angular|react)', 'angular')
   .option('-l, --library <library>', '指定使用的国际化库(ng-i18n|i18next|react-i18n)', 'ng-i18n')
   .action(async (options: ExtractOptions) => {
     try {
       await extract(options);
+      console.log('执行成功');
     } catch (error) {
       console.error('提取失败:', error);
       process.exit(1);
@@ -66,6 +68,7 @@ program
     }) => {
       try {
         await translate(options);
+        console.log('执行成功');
       } catch (error) {
         console.error('翻译失败:', error);
         process.exit(1);

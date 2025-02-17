@@ -3,9 +3,9 @@ import { NgI18nTemplateTransformer, NgI18nTSTransformer } from '@/ast/parser/ng-
 import { parseAndTransform } from '@/ast/parser';
 import type { InjectOptions } from '../types';
 import { getAllFiles } from '../utils';
-import { resolveConfig, format, resolveConfigFile } from 'prettier';
+import * as prettier from "prettier";
 import { I18nextTransformer } from '@/ast/parser/i18next';
-import { ReactI18nextTransformer } from 'src/ast/parser/react-i18next';
+import { ReactI18nextTransformer } from '@/ast/parser/react-i18next';
 
 const rules = [
   {
@@ -68,13 +68,13 @@ export async function injectCode(
 
     if (newContent) {
       if (prettierEnabled) {
-        const configPath = await resolveConfigFile(prettierConfigPath);
-        const prettierConfig = await resolveConfig(configPath, {
+        const configPath = await prettier.resolveConfigFile(prettierConfigPath);
+        const prettierConfig = await prettier.resolveConfig(configPath, {
           useCache: false,
           editorconfig: false,
         });
         try {
-          newContent = await format(newContent, {
+          newContent = await prettier.format(newContent, {
             ...prettierConfig,
             filepath: fileName,
             parser: rule.prettierParser,

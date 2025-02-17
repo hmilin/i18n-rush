@@ -1,8 +1,6 @@
 import * as t from '@babel/types';
 
 import { NodePath } from '@babel/traverse';
-import { isTaggedTemplateExpression } from '@babel/types';
-import { isTSLiteralType } from '@babel/types';
 import { Text, Element, Attribute, Node } from '@angular/compiler';
 import { isContainChinese } from '@/utils';
 
@@ -64,7 +62,7 @@ export const NgI18nTemplateTransformer = {
 };
 
 export const injectNgI18nKeyInTS = (path: NodePath) => {
-  if (isTSLiteralType(path.parent)) {
+  if (t.isTSLiteralType(path.parent)) {
     return;
   }
   try {
@@ -73,7 +71,7 @@ export const injectNgI18nKeyInTS = (path: NodePath) => {
         path.replaceWith(createTaggedTemplateExpression('$localize', path.node.value));
       }
       path.skip();
-    } else if (t.isTemplateLiteral(path.node) && !isTaggedTemplateExpression(path.parent)) {
+    } else if (t.isTemplateLiteral(path.node) && !t.isTaggedTemplateExpression(path.parent)) {
       if (path.node.quasis.some(quasi => isContainChinese(quasi.value.raw))) {
         path.replaceWith(createTaggedTemplateExpression('$localize', path.node));
       }

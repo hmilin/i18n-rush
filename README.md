@@ -34,6 +34,12 @@ i18n-rush extract
 
 ### translate
 
+从`huggingface`下载翻译模型进行翻译，生成目标翻译文件
+
 ```
 i18n-rush translate
 ```
+
+## 流程图
+
+

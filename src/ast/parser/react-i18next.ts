@@ -1,8 +1,6 @@
 import { NodePath } from '@babel/traverse';
 import * as t from '@babel/types';
 import { isContainChinese } from '@/utils';
-import traverse from '@babel/traverse';
-import { isFunctionExpression } from 'typescript';
 
 let hookUsed = false;
 let componentUsed = false;

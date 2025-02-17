@@ -1,7 +1,5 @@
 import { parse } from '@babel/parser';
 import traverse from '@babel/traverse';
-import { isClassDeclaration } from '@babel/types';
-import { isExportNamedDeclaration } from '@babel/types';
 import parseAngularTemplate from './parseNgTemplate';
 import traverseTemplate from './traverseTemplate';
 import { injectNgI18nKeyInTemplate } from '../parser/ng-i18n';
