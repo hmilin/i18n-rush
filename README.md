@@ -17,7 +17,7 @@
 
 流程图：
 
-![流程图]('/public/i18n-rush-flow.jpg')
+![流程图](public/i18n-rush-flow.jpg)
 
 ## 安装
 
