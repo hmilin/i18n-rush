@@ -55,10 +55,8 @@ program
   .requiredOption('-t, --target <target>', '输出文件')
   .option('--sourceLanguage <source>', '源语言', 'zh')
   .option('--targetLanguage <target>', '目标语言', 'en')
-  .option('-p, --path <path>', '指定翻译文件路径', './src/locales')
-  .option('-e, --engine <engine>', '指定翻译引擎 (google|openai)', 'google')
-  .option('--proxy <proxyUrl>', '调用fetch接口时使用代理')
   .option('-f, --format <format>', '格式 支持xlf、xlf2、json', 'json')
+  .option('--proxy <proxyUrl>', '调用fetch接口时使用代理')
   .action(
     async (options: {
       source: string;

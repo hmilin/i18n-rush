@@ -1,9 +1,10 @@
 {
   "name": "i18n-rush",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "国际化升级工具 - 帮助 Angular、React 项目快速实现国际化",
   "main": "src/cli.js",
   "type": "module",
+  "private": false,
   "bin": {
     "i18n-rush": "./dist/i18n-rush.cjs"
   },
@@ -13,10 +14,15 @@
     "dev": "vite-node src/cli.ts",
     "test": "vitest watch"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hmilin/i18n-rush.git"
+  },
   "dependencies": {
     "@huggingface/transformers": "^3.3.3",
     "https-proxy-agent": "^7.0.6",
-    "node-fetch": "^3.3.2"
+    "node-fetch": "^3.3.2",
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
     "@angular/compiler": "^15.2.10",
@@ -38,7 +44,6 @@
     "prettier": "^3.4.2",
     "querystring": "^0.2.1",
     "rollup-plugin-node-externals": "^8.0.0",
-    "sharp": "^0.33.5",
     "ts-node": "^10.9.1",
     "typescript": "^5.7.3",
     "vite": "^6.0.11",
