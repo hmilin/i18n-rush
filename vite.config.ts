@@ -17,18 +17,18 @@ export default defineConfig({
       ...nodeExternals({ deps: false }),
     },
   ],
+  publicDir: false,
   build: {
-    minify: false,
     lib: {
       entry: path.resolve(__dirname, './src/cli.ts'),
       name: 'i18n-rush',
       formats: ['cjs'],
     },
     commonjsOptions: {
-      ignoreDynamicRequires: true
+      ignoreDynamicRequires: true,
     },
     rollupOptions: {
-      external: ['@huggingface/transformers'],
+      external: ['@huggingface/transformers', 'prettier'],
     },
   },
 });
